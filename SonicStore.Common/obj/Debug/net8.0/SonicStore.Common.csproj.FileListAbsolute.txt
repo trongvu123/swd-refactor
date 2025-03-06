@@ -1,0 +1,11 @@
+D:\swd\SonicStore.Common\bin\Debug\net8.0\SonicStore.Common.deps.json
+D:\swd\SonicStore.Common\bin\Debug\net8.0\SonicStore.Common.dll
+D:\swd\SonicStore.Common\bin\Debug\net8.0\SonicStore.Common.pdb
+D:\swd\SonicStore.Common\obj\Debug\net8.0\SonicStore.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\swd\SonicStore.Common\obj\Debug\net8.0\SonicStore.Common.AssemblyInfoInputs.cache
+D:\swd\SonicStore.Common\obj\Debug\net8.0\SonicStore.Common.AssemblyInfo.cs
+D:\swd\SonicStore.Common\obj\Debug\net8.0\SonicStore.Common.csproj.CoreCompileInputs.cache
+D:\swd\SonicStore.Common\obj\Debug\net8.0\SonicStore.Common.dll
+D:\swd\SonicStore.Common\obj\Debug\net8.0\refint\SonicStore.Common.dll
+D:\swd\SonicStore.Common\obj\Debug\net8.0\SonicStore.Common.pdb
+D:\swd\SonicStore.Common\obj\Debug\net8.0\ref\SonicStore.Common.dll

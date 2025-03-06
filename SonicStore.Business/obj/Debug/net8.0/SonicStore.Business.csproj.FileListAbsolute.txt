@@ -1,0 +1,17 @@
+D:\swd\SonicStore.Business\bin\Debug\net8.0\appsettings.Development.json
+D:\swd\SonicStore.Business\bin\Debug\net8.0\appsettings.json
+D:\swd\SonicStore.Business\bin\Debug\net8.0\SonicStore.Business.deps.json
+D:\swd\SonicStore.Business\bin\Debug\net8.0\SonicStore.Business.dll
+D:\swd\SonicStore.Business\bin\Debug\net8.0\SonicStore.Business.pdb
+D:\swd\SonicStore.Business\bin\Debug\net8.0\SonicStore.Repository.dll
+D:\swd\SonicStore.Business\bin\Debug\net8.0\SonicStore.Repository.pdb
+D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicStore.Business.csproj.AssemblyReference.cache
+D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicStore.Business.GeneratedMSBuildEditorConfig.editorconfig
+D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicStore.Business.AssemblyInfoInputs.cache
+D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicStore.Business.AssemblyInfo.cs
+D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicStore.Business.csproj.CoreCompileInputs.cache
+D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicSto.AF84C6A0.Up2Date
+D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicStore.Business.dll
+D:\swd\SonicStore.Business\obj\Debug\net8.0\refint\SonicStore.Business.dll
+D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicStore.Business.pdb
+D:\swd\SonicStore.Business\obj\Debug\net8.0\ref\SonicStore.Business.dll
