@@ -15,15 +15,17 @@ namespace SonicStore.Areas.SonicStore.Controllers.CheckoutManage
         private readonly ICheckoutService _checkoutService;
         private readonly SonicStoreContext _context;
         private readonly IVnPayService _vnPayService;
-
+        private readonly ICartService _cartService;
         public CheckoutController(
             ICheckoutService checkoutService,
             SonicStoreContext context,
-            IVnPayService vnPayService)
+            IVnPayService vnPayService,
+            ICartService cartService)
         {
             _checkoutService = checkoutService;
             _context = context;
             _vnPayService = vnPayService;
+            _cartService = cartService;
         }
 
         [HttpGet("checkout")]
@@ -171,7 +173,7 @@ namespace SonicStore.Areas.SonicStore.Controllers.CheckoutManage
             if (!string.IsNullOrEmpty(listJson))
             {
                 var cartIds = JsonConvert.DeserializeObject<List<int>>(listJson);
-                await _checkoutService.ProcessPaymentVnPAYSuccessAsync(cartIds, user.Id.ToString(), "COD");
+                await _checkoutService.ProcessPaymentVnPAYSuccessAsync(cartIds, user.Id.ToString(), "VNPAY");
                 HttpContext.Session.Remove("listCheckout");
                 HttpContext.Session.CommitAsync();
             }
