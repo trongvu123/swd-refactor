@@ -30,6 +30,54 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
             ViewBag.user = user;
             return View();
         }
+
+        [HttpPost("add-item")]
+        public async Task<JsonResult> AddProductToCart(int id)
+        {
+            var userJson = HttpContext.Session.GetString("user");
+            var userSession = JsonConvert.DeserializeObject<User>(userJson);
+            var productItem = await _context.OrderDetails.FirstOrDefaultAsync(od => od.StorageId == id && od.Status == "cart" && od.CustomerId == userSession.Id);
+            var productOption = await _context.Storages.Where(s => s.Id == id).FirstOrDefaultAsync();
+            var userAddressId = await _context.UserAddresses.Where(u => u.UserId == userSession.Id && u.Status == true).FirstOrDefaultAsync();
+            var product = await _context.Storages.FindAsync(id);
+            int check = 1;
+            if (productItem == null)
+            {
+                var cart = new Cart
+                {
+                    StorageId = id,
+                    CustomerId = userSession.Id,
+                    Quantity = 1,
+                    Price = product.SalePrice,
+                    AddressId = userAddressId.Id,
+                    Status = "cart"
+                };
+                await _context.OrderDetails.AddAsync(cart);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                productItem.Quantity += 1;
+                productItem.Price += product.SalePrice;
+                _context.OrderDetails.Update(productItem);
+                if (productItem.Quantity > productOption.quantity - 1)
+                {
+                    check = 2;
+                }
+                else if (productOption.quantity == 0)
+                {
+                    check = 3;
+                }
+                else
+                {
+                    await _context.SaveChangesAsync();
+
+                }
+            }
+
+            return Json(new { status = check });
+        }
+
         [HttpGet("loaddataCart")]
         public async Task<JsonResult> loadData()
         {

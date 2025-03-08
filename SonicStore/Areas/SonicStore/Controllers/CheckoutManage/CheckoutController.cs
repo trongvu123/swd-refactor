@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using SonicStore.Areas.SonicStore.Models;
 using SonicStore.Business.Dto;
 using SonicStore.Business.Service;
 using SonicStore.Repository.Entity;
@@ -74,22 +73,22 @@ namespace SonicStore.Areas.SonicStore.Controllers.CheckoutManage
             return View("PaymentCallBack");
         }
 
-        [HttpPost("buy-now")]
-        public async Task<IActionResult> BuyNow([FromBody] BuyNowRequestDto request)
-        {
-            var result = await _checkoutService.ProcessBuyNowAsync(request, HttpContext);
+        //[HttpPost("buy-now")]
+        //public async Task<IActionResult> BuyNow([FromBody] BuyNowRequestDto request)
+        //{
+        //    var result = await _checkoutService.ProcessBuyNowAsync(request, HttpContext);
 
-            if (!result.Success)
-                return Json(new { status = false, message = result.Message });
+        //    if (!result.Success)
+        //        return Json(new { status = false, message = result.Message });
 
-            if (!string.IsNullOrEmpty(result.PaymentUrl))
-                return Json(new { status = true, url = result.PaymentUrl });
+        //    if (!string.IsNullOrEmpty(result.PaymentUrl))
+        //        return Json(new { status = true, url = result.PaymentUrl });
 
-            return Json(new { status = true });
-        }
+        //    return Json(new { status = true });
+        //}
 
         [HttpPost("checkout-order")]
-        public async Task<IActionResult> CheckOutVNPAY([FromForm] string payment)
+        public async Task<IActionResult> CheckOutOrder([FromForm] string payment)
         {
             if (payment == "cod")
             {

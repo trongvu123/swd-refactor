@@ -97,7 +97,7 @@
                   <div class="choose-payment-method">
                         <div class="choose-payment-text">Chọn hình thức thanh toán</div>
                         @* điền controller với action vào đây để nhận về type *@
-                        <form id="payment-form" asp-controller="Checkout" asp-action="CheckOutVNPAY" method="post">
+                        <form id="payment-form" asp-controller="Checkout" asp-action="CheckOutOrder" method="post">
                             <div class="radio-contain">
                                 <input type="radio" name="payment" value="cod" id="radio2"/>
                                 <label for="radio2" class="radio-fake1"></label>
