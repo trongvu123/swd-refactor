@@ -41,6 +41,12 @@ public partial class SonicStoreContext : DbContext
 
     public virtual DbSet<UserAddress> UserAddresses { get; set; }
     public virtual DbSet<Inventory> Storages { get; set; }
+
+    public virtual DbSet<Campaign> Campaigns { get; set; }
+
+    public virtual DbSet<Budget> Budgets { get; set; }  
+
+    public virtual DbSet<Promotion> Promotion { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=localhost,1433;Initial Catalog=SonicStore;User ID=sa;Password=123456;TrustServerCertificate=True");

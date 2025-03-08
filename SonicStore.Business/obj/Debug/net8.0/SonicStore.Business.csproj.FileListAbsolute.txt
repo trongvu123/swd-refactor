@@ -15,3 +15,4 @@ D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicStore.Business.dll
 D:\swd\SonicStore.Business\obj\Debug\net8.0\refint\SonicStore.Business.dll
 D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicStore.Business.pdb
 D:\swd\SonicStore.Business\obj\Debug\net8.0\ref\SonicStore.Business.dll
+D:\swd\SonicStore.Business\obj\Debug\net8.0\SonicStore.Business.sourcelink.json

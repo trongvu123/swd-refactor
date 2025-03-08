@@ -9,3 +9,4 @@ D:\swd\SonicStore.Common\obj\Debug\net8.0\SonicStore.Common.dll
 D:\swd\SonicStore.Common\obj\Debug\net8.0\refint\SonicStore.Common.dll
 D:\swd\SonicStore.Common\obj\Debug\net8.0\SonicStore.Common.pdb
 D:\swd\SonicStore.Common\obj\Debug\net8.0\ref\SonicStore.Common.dll
+D:\swd\SonicStore.Common\obj\Debug\net8.0\SonicStore.Common.sourcelink.json

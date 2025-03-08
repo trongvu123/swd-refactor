@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SonicStore.Business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+47b73b17abbcd3611c37550f5cefc5d1e500163a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b0f7c6fae939b90137d45543e1280b3c74cb9705")]
 [assembly: System.Reflection.AssemblyProductAttribute("SonicStore.Business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SonicStore.Business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -14,3 +14,4 @@ D:\swd\SonicStore.Repository\obj\Debug\net8.0\refint\SonicStore.Repository.dll
 D:\swd\SonicStore.Repository\obj\Debug\net8.0\SonicStore.Repository.pdb
 D:\swd\SonicStore.Repository\obj\Debug\net8.0\SonicStore.Repository.genruntimeconfig.cache
 D:\swd\SonicStore.Repository\obj\Debug\net8.0\ref\SonicStore.Repository.dll
+D:\swd\SonicStore.Repository\obj\Debug\net8.0\SonicStore.Repository.sourcelink.json

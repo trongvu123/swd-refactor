@@ -67,4 +67,14 @@ public partial class User
 
     [InverseProperty("User")]
     public virtual ICollection<UserAddress> UserAddresses { get; set; } = new List<UserAddress>();
+
+    [InverseProperty("User")]
+    public virtual ICollection<Campaign> Campaigns { get; set; } = new List<Campaign>();
+
+    // Thêm các collection mới cho mối quan hệ với Promotion
+    [InverseProperty("CreatedByUser")]
+    public virtual ICollection<Promotion> CreatedPromotions { get; set; } = new List<Promotion>();
+
+    [InverseProperty("UpdatedByUser")]
+    public virtual ICollection<Promotion> UpdatedPromotions { get; set; } = new List<Promotion>();
 }

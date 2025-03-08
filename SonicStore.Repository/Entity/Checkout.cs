@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 namespace SonicStore.Repository.Entity;
 
-[Table("Checkout")]
+[Table("Order")]
 
 
 public partial class Checkout
