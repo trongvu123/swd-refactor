@@ -29,11 +29,13 @@ builder.Services.AddAuthentication(option =>
 });
 builder.Services.AddDbContext<SonicStore.Repository.Entity.SonicStoreContext>(options =>
 {
-    string connectionString = builder.Configuration.GetConnectionString("SonicStore");
+    string connectionString = builder.Configuration.GetConnectionString("SonicStore")!;
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddSingleton<IVnPayService, VnPayService>();
 builder.Services.AddScoped<ICheckoutRepository, CheckoutRepository>();
+builder.Services.AddScoped<IUserAddressRepository, UserAddressRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<ICheckoutService, CheckoutService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews()

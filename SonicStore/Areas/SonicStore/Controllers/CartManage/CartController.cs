@@ -170,7 +170,7 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
             }
             await _context.SaveChangesAsync();
             return Json(new { status = status });
-        } 
+        }
         [HttpPost("buy-product")]
         public async Task<IActionResult> BuyProduct([FromBody] List<int> listProduct)
         {

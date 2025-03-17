@@ -12,19 +12,13 @@ namespace SonicStore.Areas.SonicStore.Controllers.CheckoutManage
     public class CheckoutController : Controller
     {
         private readonly ICheckoutService _checkoutService;
-        private readonly SonicStoreContext _context;
         private readonly IVnPayService _vnPayService;
-        private readonly ICartService _cartService;
         public CheckoutController(
             ICheckoutService checkoutService,
-            SonicStoreContext context,
-            IVnPayService vnPayService,
-            ICartService cartService)
+            IVnPayService vnPayService)
         {
             _checkoutService = checkoutService;
-            _context = context;
             _vnPayService = vnPayService;
-            _cartService = cartService;
         }
 
         [HttpGet("checkout")]
@@ -34,20 +28,15 @@ namespace SonicStore.Areas.SonicStore.Controllers.CheckoutManage
             if (string.IsNullOrEmpty(userJson))
                 return RedirectToAction("Login", "Account", new { area = "" });
 
-            var user = JsonConvert.DeserializeObject<Repository.Entity.User>(userJson);
-            var address = await _context.UserAddresses
-                .FirstOrDefaultAsync(u => u.UserId == user.Id && u.Status);
+            var user = JsonConvert.DeserializeObject<User>(userJson);
+            var address = await _checkoutService.GetUserAddressActive(user.Id);
 
             var listJson = HttpContext.Session.GetString("listCheckout");
             if (string.IsNullOrEmpty(listJson))
-                return View(new List<Repository.Entity.Cart>());
+                return View(new List<Cart>());
 
             var cartIds = JsonConvert.DeserializeObject<List<int>>(listJson);
-            var cartItems = await _context.OrderDetails
-                .Include(o => o.Storage)
-                .ThenInclude(o => o.Product)
-                .Where(o => cartIds.Contains(o.Id))
-                .ToListAsync();
+            var cartItems = await _checkoutService.GetCartIncludeInventoryAndProductHaveAddressCondition(cartIds);
 
             ViewBag.totalPrice = cartItems.Sum(i => i.Quantity * i.Storage.SalePrice);
             ViewBag.userSession = user;
@@ -112,10 +101,10 @@ namespace SonicStore.Areas.SonicStore.Controllers.CheckoutManage
 
 
                 var listJson = HttpContext.Session.GetString("listCheckout");
-                List<Repository.Entity.Cart> listToCheckout = new List<Repository.Entity.Cart>();
+                List<Cart> listToCheckout = new List<Cart>();
                 double Amount = 0;
                 var listSession = JsonConvert.DeserializeObject<List<int>>(listJson);
-                foreach (var item in _context.OrderDetails.Include(o => o.Storage).ThenInclude(o => o.Product))
+                foreach (var item in _checkoutService.GetCartIncludeInventoryAndProduct())
                 {
                     foreach (var i in listSession)
                     {
@@ -127,7 +116,7 @@ namespace SonicStore.Areas.SonicStore.Controllers.CheckoutManage
                     }
                 }
                 var _user = HttpContext.Session.GetString("user");
-                Repository.Entity.User user = JsonConvert.DeserializeObject<Repository.Entity.User>(_user);
+                Repository.Entity.User user = JsonConvert.DeserializeObject<User>(_user);
                 var model = new VnPayRequestModel
                 {
                     Fullname = user.FullName,
