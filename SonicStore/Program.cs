@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using SonicStore.Business.Service;
 using SonicStore.Repository.Repository;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -25,17 +24,21 @@ builder.Services.AddAuthentication(option =>
     options.ClientId = builder.Configuration.GetSection("GoogleKeys:ClientId").Value;
     options.ClientSecret = builder.Configuration.GetSection("GoogleKeys:ClientSecret").Value;
     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-
 });
+
 builder.Services.AddDbContext<SonicStore.Repository.Entity.SonicStoreContext>(options =>
 {
     string connectionString = builder.Configuration.GetConnectionString("SonicStore")!;
     options.UseSqlServer(connectionString);
 });
+
 builder.Services.AddSingleton<IVnPayService, VnPayService>();
 builder.Services.AddScoped<ICheckoutRepository, CheckoutRepository>();
 builder.Services.AddScoped<IUserAddressRepository, UserAddressRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICartService, CartService>(); // Added this line
 builder.Services.AddScoped<ICheckoutService, CheckoutService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews()
@@ -44,17 +47,6 @@ builder.Services.AddControllersWithViews()
         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
     });
 
-//builder.Services.AddDbContext<SonicStoreContext>(options =>
-//{
-//    string connectionString = builder.Configuration.GetConnectionString("SonicStore");
-//    options.UseSqlServer(connectionString);
-//});
-
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
-//{
-//    option.LoginPath = "/login";
-//    option.AccessDeniedPath = "/error";
-//});
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(option =>
 {
@@ -62,7 +54,6 @@ builder.Services.AddSession(option =>
     option.IdleTimeout = new TimeSpan(0, 50, 0);
 });
 builder.Services.AddSingleton<IVnPayService, VnPayService>();
-//builder.Services.AddSingleton<VnPayService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
@@ -82,6 +73,7 @@ app.Use(async (context, next) =>
     }
     await next();
 });
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapAreaControllerRoute(

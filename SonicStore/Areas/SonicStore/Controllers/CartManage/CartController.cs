@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using NuGet.Configuration;
 using SonicStore.Repository.Entity;
 using SonicStore.Areas.SonicStore.Dtos;
+using SonicStore.Business.Service;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace SonicStore.Areas.SonicStore.Controllers.CartManage
 {
@@ -13,10 +15,12 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
     public class CartController : Controller
     {
         private readonly SonicStoreContext _context;
+        private readonly ICartService _cartService;
 
-        public CartController(SonicStoreContext context)
+        public CartController(SonicStoreContext context, ICartService cartService)
         {
             _context = context;
+            _cartService = cartService;
         }
 
         [HttpGet("cart")]
@@ -112,63 +116,21 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
         [HttpPost("update-quantity")]
         public async Task<JsonResult> UpdateQuantity(string? quantity, int? id, int? all)
         {
-            int status = 0;
             var userJson = HttpContext.Session.GetString("user");
             var userSession = JsonConvert.DeserializeObject<User>(userJson);
-            var allItem = await _context.OrderDetails.Where(o => o.CustomerId == userSession.Id && o.Status == "cart").ToListAsync();
-            var productOption = await _context.OrderDetails.Include(o => o.Storage).Where(o => o.Id == id).Select(o => o.Storage).FirstOrDefaultAsync();
-            if (!string.IsNullOrEmpty(quantity))
-            {
-                var cartItem = await _context.OrderDetails.Where(c => c.Id == id).FirstOrDefaultAsync();
-                var unitPrice = await _context.OrderDetails.Where(c => cartItem.StorageId == c.Storage.Id).Include(c => c.Storage).Select(s => s.Storage.SalePrice).FirstOrDefaultAsync();
 
-                if (int.TryParse(quantity, out var quantityInput))
-                {
-                    cartItem.Quantity = quantityInput;
-                    cartItem.Price = quantityInput * unitPrice;
-                    status = 1;
-                    _context.OrderDetails.Update(cartItem);
-                }
-                else
-                {
-                    if (quantity == "down")
-                    {
-                        if (cartItem.Quantity <= 1)
-                        {
-                            status = 2;
-                            cartItem.Quantity = 1;
-                            _context.OrderDetails.Update(cartItem);
-                        }                     
-                        else
-                        {
-                            cartItem.Quantity -= 1;
-                            cartItem.Price -= unitPrice;
-                            status = 1;
-                            _context.OrderDetails.Update(cartItem);
-                        }
-                    }
-                    else
-                    {
-                        if (cartItem.Quantity > productOption.quantity - 1)
-                        {
-                            status = 3;
-                        }
-                        else
-                        {
-                            cartItem.Quantity += 1;
-                            cartItem.Price += unitPrice;
-                            status = 1;
-                            _context.OrderDetails.Update(cartItem);
-                        }
-                    }
-                }
+            int status = 0;
+
+            if (id.HasValue && !string.IsNullOrEmpty(quantity))
+            {
+                status = await _cartService.UpdateCartItemQuantity(id, quantity);
             }
+
             if (all.HasValue)
             {
-                _context.OrderDetails.RemoveRange(allItem);
-
+                await _cartService.RemoveAllCartItems(userSession.Id);
             }
-            await _context.SaveChangesAsync();
+
             return Json(new { status = status });
         }
         [HttpPost("buy-product")]
