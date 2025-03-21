@@ -2,9 +2,23 @@
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using SonicStore.Business.Service;
+using SonicStore.Business.Service.AccountService;
+using SonicStore.Business.Service.CartService;
+using SonicStore.Business.Service.CheckoutService;
+using SonicStore.Business.Service.OrderService;
+using SonicStore.Business.Service.ProductService;
+using SonicStore.Business.Service.PromotionService;
+using SonicStore.Business.Service.VnPayService;
 using SonicStore.Common.Utils;
-using SonicStore.Repository.Repository;
+using SonicStore.Repository.Repository.AccountRepo;
+using SonicStore.Repository.Repository.CartRepo;
+using SonicStore.Repository.Repository.CheckoutRepo;
+using SonicStore.Repository.Repository.InventoryRepo;
+using SonicStore.Repository.Repository.OrderRepo;
+using SonicStore.Repository.Repository.ProductRepo;
+using SonicStore.Repository.Repository.PromotionRepo;
+using SonicStore.Repository.Repository.UserAddressRepo;
+using SonicStore.Repository.Repository.UserRepo;
 
 var builder = WebApplication.CreateBuilder(args);
 

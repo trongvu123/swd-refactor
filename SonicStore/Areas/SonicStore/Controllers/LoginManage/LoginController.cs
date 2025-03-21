@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using SonicStore.Business.Service;
 using SonicStore.Repository.Entity;
+using SonicStore.Business.Service.AccountService;
 
 namespace SonicStore.Areas.SonicStore.Controllers.LoginManage
 {

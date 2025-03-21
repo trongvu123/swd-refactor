@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SonicStore.Business.Dto;
-using SonicStore.Business.Service;
+using SonicStore.Business.Service.CheckoutService;
+using SonicStore.Business.Service.VnPayService;
 using SonicStore.Repository.Entity;
 namespace SonicStore.Areas.SonicStore.Controllers.CheckoutManage
 {

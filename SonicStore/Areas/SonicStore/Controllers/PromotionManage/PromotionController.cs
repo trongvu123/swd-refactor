@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SonicStore.Business.Service;
+using SonicStore.Business.Service.PromotionService;
 using SonicStore.Repository.Entity;
 
 namespace SonicStore.Areas.SonicStore.Controllers.PromotionManage

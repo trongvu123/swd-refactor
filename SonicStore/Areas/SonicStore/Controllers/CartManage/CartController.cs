@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 using NuGet.Configuration;
 using SonicStore.Repository.Entity;
 using SonicStore.Areas.SonicStore.Dtos;
-using SonicStore.Business.Service;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using SonicStore.Business.Service.CartService;
 
 namespace SonicStore.Areas.SonicStore.Controllers.CartManage
 {

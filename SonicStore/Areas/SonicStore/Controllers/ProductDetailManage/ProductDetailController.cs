@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using SonicStore.Business.Service;
+using SonicStore.Business.Service.ProductService;
 using SonicStore.Repository.Entity;
 
 namespace SonicStore.Areas.SonicStore.Controllers.ProductDetailManage

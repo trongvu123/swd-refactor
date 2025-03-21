@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SonicStore.Business.Service;
+using SonicStore.Business.Service.OrderService;
 using SonicStore.Repository.Entity;
 
 namespace SonicStore.Areas.SonicStore.Controllers.OrderListManage
