@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SonicStore.Repository.Entity;
-using SonicStore.Areas.SonicStore.Utils;
+using SonicStore.Common.Utils;
 
 namespace SonicStore.Areas.SonicStore.Controllers.AdminDashboardManage
 {
@@ -116,6 +116,8 @@ namespace SonicStore.Areas.SonicStore.Controllers.AdminDashboardManage
             }
             return Json(new { status = true }); 
         }
+
+        EncriptPassword encriptPassword = new EncriptPassword();
         [HttpPost("add-user-admin")]
         public async Task<JsonResult> AddUser(string userData)
         {
@@ -123,7 +125,7 @@ namespace SonicStore.Areas.SonicStore.Controllers.AdminDashboardManage
             var account = new Account
             {
                 Username = RandomInfomation.GetUserName(),
-                Password = EncriptPassword.HashPassword("123"),
+                Password = encriptPassword.HashPassword("123"),
                 RegisterDate = DateOnly.FromDateTime(DateTime.Now),
                 Status = "on",
                 ByAdmin = true

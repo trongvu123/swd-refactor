@@ -29,21 +29,25 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
             var userJson = HttpContext.Session.GetString("user");
             var userSession = JsonConvert.DeserializeObject<User>(userJson);
             var user = _context.Users.FirstOrDefault();
-            var addressUser = await _context.UserAddresses.Where(u => u.UserId == userSession.Id && u.Status == true).Select(a => a.User_Address).FirstOrDefaultAsync();
+            var addressUser = await _cartService.GetUserAddress(userSession.Id);
             ViewBag.AddressUser = addressUser;
             ViewBag.user = user;
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost("add-item")]
         public async Task<JsonResult> AddProductToCart(int id)
         {
             var userJson = HttpContext.Session.GetString("user");
+            if (userJson == null)
+            {
+                return Json(new { status = 401, redirectUrl = "/SonicStore/Login/login" });
+            }
             var userSession = JsonConvert.DeserializeObject<User>(userJson);
-            var productItem = await _context.OrderDetails.FirstOrDefaultAsync(od => od.StorageId == id && od.Status == "cart" && od.CustomerId == userSession.Id);
-            var productOption = await _context.Storages.Where(s => s.Id == id).FirstOrDefaultAsync();
-            var userAddressId = await _context.UserAddresses.Where(u => u.UserId == userSession.Id && u.Status == true).FirstOrDefaultAsync();
-            var product = await _context.Storages.FindAsync(id);
+            var productItem = await _cartService.GetCartItemByUser(userSession.Id,id);
+            var productOption = await _cartService.GetInventoryOption(id);
+            var userAddressId = await _cartService.GetUserAddress(userSession.Id);
             int check = 1;
             if (productItem == null)
             {
@@ -52,18 +56,18 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
                     StorageId = id,
                     CustomerId = userSession.Id,
                     Quantity = 1,
-                    Price = product.SalePrice,
+                    Price = productOption.SalePrice,
                     AddressId = userAddressId.Id,
                     Status = "cart"
                 };
-                await _context.OrderDetails.AddAsync(cart);
-                await _context.SaveChangesAsync();
+                await _cartService.AddCartItem(cart);
+                await _cartService.SaveChange();
             }
             else
             {
                 productItem.Quantity += 1;
-                productItem.Price += product.SalePrice;
-                _context.OrderDetails.Update(productItem);
+                productItem.Price += productOption.SalePrice;
+                await _cartService.SaveChange();
                 if (productItem.Quantity > productOption.quantity - 1)
                 {
                     check = 2;
@@ -74,7 +78,7 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
                 }
                 else
                 {
-                    await _context.SaveChangesAsync();
+                    await _cartService.SaveChange();
 
                 }
             }

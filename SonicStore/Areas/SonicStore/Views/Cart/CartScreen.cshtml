@@ -1,6 +1,7 @@
 ﻿@model List<Cart>
 @{
-	var address = ViewBag.AddressUser as string;
+	var addressUser = ViewBag.AddressUser as UserAddress;
+	var address = addressUser.User_Address as string;
 	var user = ViewBag.user as User;
 }
 <link rel="stylesheet" href=" https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">

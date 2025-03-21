@@ -8,7 +8,7 @@
     string[] address = ViewBag.AddressParts as string[];
     int data=0;
     string popperjs = "@popperjs";
-    var user = ViewBag.userSession as User;
+    // var user = ViewBag.userSession as User;
 }
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="vi" xml:lang="vi">
@@ -1022,110 +1022,110 @@ Giảm thêm 100.000đ khi mua kèm iPad/Apple Watch" autocomplete="off">
                         </div>
                         <input type="hidden" id="inp-storageId" value=""/>
                     </div>
-                    <div class="cart-area__content">
-                        <div class="info">
-                            <form id="QuickOrderForm">
+@*                     <div class="cart-area__content"> *@
+@*                         <div class="info"> *@
+@*                             <form id="QuickOrderForm"> *@
 
-                                <h3 class="title">Thông tin khách hàng</h3>
-                                <div class="payment-customer flex address-default" id="address-default">
-                                    <div class="form-row mb-12 flex row-name">
-                                        <input type="text" class="form-control" id="name-validation" name="name" value="@user.FullName" readonly placeholder="Họ và tên*" />
-                                    </div>
-                                    <div class="form-row mb-12 flex row-phone">
-                                        <input type="tel" class="form-control" id="phone-validation" name="phone" value="@user.Phone" readonly placeholder="Điện thoại*" />
-                                    </div>
-                                    <div class="form-row mb-12 flex">
-                                        <input type="email" class="form-control" id="email-validation" name="email" value="@user.Email" readonly placeholder="Email" />
-                                    </div>
-                                </div>
-                                <h3 class="title">Chọn cách thức nhận hàng</h3>
-                                <div class="method">
-                                    <ul class="method__list">
-                                        <li class="method__list--item">
-                                            <input type="radio" class="input-radio" id="ReceiveTypeID1" name="ReceiveTypeID" value="1" checked="checked" />
-                                            <label for="ReceiveTypeID1">Giao tận nơi</label>
-                                        </li>
-                                        <li class="method__list--item">
-                                            <input type="radio" class="input-radio" id="ReceiveTypeID2" name="ReceiveTypeID" value="2" />
-                                            <label for="ReceiveTypeID2">Thanh toán trực tuyến<label>
-                                        </li>
-                                    </ul>
-                                    <div class="receive_box_container">
-                                        <div class="receive_box receive_method_cod">
-                                            <h4 class="title">Thông tin nhận hàng</h4>
-                                            <div class="form-row mb-12 flex row-select">
-                                                        <select class="form-control" name="city_id" id="city_id">
-                                                    <option value="0">Tỉnh/ thành phố (*)</option>
+@*                                 <h3 class="title">Thông tin khách hàng</h3> *@
+@*                                 <div class="payment-customer flex address-default" id="address-default"> *@
+@*                                     <div class="form-row mb-12 flex row-name"> *@
+@*                                         <input type="text" class="form-control" id="name-validation" name="name" value="@user.FullName" readonly placeholder="Họ và tên*" /> *@
+@*                                     </div> *@
+@*                                     <div class="form-row mb-12 flex row-phone"> *@
+@*                                         <input type="tel" class="form-control" id="phone-validation" name="phone" value="@user.Phone" readonly placeholder="Điện thoại*" /> *@
+@*                                     </div> *@
+@*                                     <div class="form-row mb-12 flex"> *@
+@*                                         <input type="email" class="form-control" id="email-validation" name="email" value="@user.Email" readonly placeholder="Email" /> *@
+@*                                     </div> *@
+@*                                 </div> *@
+@*                                 <h3 class="title">Chọn cách thức nhận hàng</h3> *@
+@*                                 <div class="method"> *@
+@*                                     <ul class="method__list"> *@
+@*                                         <li class="method__list--item"> *@
+@*                                             <input type="radio" class="input-radio" id="ReceiveTypeID1" name="ReceiveTypeID" value="1" checked="checked" /> *@
+@*                                             <label for="ReceiveTypeID1">Giao tận nơi</label> *@
+@*                                         </li> *@
+@*                                         <li class="method__list--item"> *@
+@*                                             <input type="radio" class="input-radio" id="ReceiveTypeID2" name="ReceiveTypeID" value="2" /> *@
+@*                                             <label for="ReceiveTypeID2">Thanh toán trực tuyến<label> *@
+@*                                         </li> *@
+@*                                     </ul> *@
+@*                                     <div class="receive_box_container"> *@
+@*                                         <div class="receive_box receive_method_cod"> *@
+@*                                             <h4 class="title">Thông tin nhận hàng</h4> *@
+@*                                             <div class="form-row mb-12 flex row-select"> *@
+@*                                                         <select class="form-control" name="city_id" id="city_id"> *@
+@*                                                     <option value="0">Tỉnh/ thành phố (*)</option> *@
                                                     
-                                                </select>
-                                               <input type="hidden" id="tinh" name="tinh" value="" />
-                                            </div>
-                                                    <div class="form-row mb-12 flex row-select">
-                                                        <select class="form-control" name="province_id" id="province_id">
-                                                            <option value="0">Quận/ huyện (*)</option>
+@*                                                 </select> *@
+@*                                                <input type="hidden" id="tinh" name="tinh" value="" /> *@
+@*                                             </div> *@
+@*                                                     <div class="form-row mb-12 flex row-select"> *@
+@*                                                         <select class="form-control" name="province_id" id="province_id"> *@
+@*                                                             <option value="0">Quận/ huyện (*)</option> *@
                                                   
-                                                        </select>
-                                                        <input type="hidden" id="huyen" name="huyen" value="" />
-                                                    </div>
-                                                    <div class="form-row mb-12 flex row-select">
-                                                        <select class="form-control" name="commune_id" id="commune_id">
-                                                            <option value="0">Xã/ phường (*)</option>
+@*                                                         </select> *@
+@*                                                         <input type="hidden" id="huyen" name="huyen" value="" /> *@
+@*                                                     </div> *@
+@*                                                     <div class="form-row mb-12 flex row-select"> *@
+@*                                                         <select class="form-control" name="commune_id" id="commune_id"> *@
+@*                                                             <option value="0">Xã/ phường (*)</option> *@
                                                          
-                                                        </select>
-                                                        <input type="hidden" id="xa" name="xa" value="" />
-                                                    </div>
+@*                                                         </select> *@
+@*                                                         <input type="hidden" id="xa" name="xa" value="" /> *@
+@*                                                     </div> *@
               
-                                        </div>
-                                        <div class="receive_box receive_method_bacs" style="display: none;">
-                                            <h4 class="title">Chọn cửa hàng</h4>
-                                            <div class="form-row mb-12 flex">
-                                                <select id="MKSystemCityID" class="form-control" name="MKSystemCityID" placeholder="Khu Vực *">
-                                                    <option value="">Khu vực</option>
-                                                    <option value="1">Miền Bắc</option>
-                                                    <option value="2">Miền Trung</option>
-                                                    <option value="3">Miền Nam</option>
-                                                </select>
-                                                <p class="err_show null">Địa chỉ không được để trống</p>
-                                            </div>
-                                            <div class="form-row mb-12 flex">
-                                                <select id="store_id" class="form-control" name="store_id" placeholder="Cửa hàng *">
-                                                    <option data-region="0" value="0">Cửa hàng *</option>
-                                                    <option data-region="3" value="22">290A Xô Viết Nghệ Tĩnh, Phường 25, Bình Thạnh, Tp HCM - Ngã Tư Hàng Xanh</option>
-                                                    <option data-region="1" value="7">367 Cầu Giấy, Hà Nội:</option>
-                                                    <option data-region="3" value="1">379 Hoàng Văn Thụ, P2, Q.Tân Bình, HCM</option>
-                                                    <option data-region="1" value="8">111 Trần Đăng Ninh, Cầu Giấy, Hà Nội:</option>
-                                                    <option data-region="3" value="2">42 Trần Quang Khải , Tân Định , Quận 1, HCM</option>
-                                                    <option data-region="1" value="10">118 Thái hà, Đống Đa, Hà Nội:</option>
-                                                    <option data-region="3" value="3">499 Nguyễn Thị Thập, Q.7, HCM</option>
-                                                    <option data-region="1" value="12">312 Nguyễn Trãi, P.Trung Văn, Q.Nam Từ Liêm, Hà Nội (gần Đại Học Hà Nội)</option>
-                                                    <option data-region="3" value="4">466 Quang Trung, P.10, Q.Gò Vấp, HCM</option>
-                                                    <option data-region="1" value="9">446 Xã Đàn, Đống Đa, Hà Nội:</option>
-                                                    <option data-region="1" value="6">380 Trần Phú, Ba Đình, TP.Thanh Hóa:</option>
-                                                    <option data-region="3" value="17">269B Hậu Giang, P5, Q.6, HCM</option>
-                                                    <option data-region="1" value="13">Ngã 3 Đông Yên, Yên Phong, Bắc Ninh (Khu công nghiệp Yên Phong)</option>
-                                                    <option data-region="3" value="18">535 Lê Hồng Phong, Q.10, HCM</option>
-                                                    <option data-region="3" value="19">98 Võ Văn Ngân, TP.Thủ Đức, HCM</option>
-                                                    <option data-region="1" value="14">269 Nguyễn Hữu Tiến, TT Đồng Văn, Duy Tiên, Hà Nam</option>
-                                                    <option data-region="1" value="15">TTBH Hà Nội: Tầng 2, số 111 Trần Đăng Ninh, Cầu Giấy, Hà Nội</option>
-                                                    <option data-region="3" value="20">TTBH 1: 377 Hoàng Văn Thụ, P.2, Q.Tân Bình, HCM</option>
-                                                    <option data-region="3" value="21">TTBH 2: 98 Võ Văn Ngân, Tp.Thủ Đức, HCM</option>
-                                                    <option data-region="2" value="16">233 Lê Duẩn, TP Vinh, Nghệ An</option>
-                                                    <option data-region="2" value="11">161 Hàm Nghi, Q.Thanh Khê, TP.Đà Nẵng:</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-row ship-note mb-12 flex">
-<textarea type="text" class="form-control ship_note" name="ship_note_bacs" placeholder="Ghi chú về đơn hàng" cols="5" rows="1"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="action">
-                                    <p class="note">Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn đặt hàng của bạn, hỗ trợ trải nghiệm của bạn trên toàn bộ trang web và cho các mục đích khác được mô tả trong <a href="https://clickbuy.com.vn/" class="policy-link color-primary" target="_blank">chính sách riêng tư</a> của chúng tôi.</p>
-                                    <button type="button" class="js-add-to-cart alt quickbuy" name="checkout" id="btnSubInstallmentForm">Tiến hành đặt hàng</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+@*                                         </div> *@
+@*                                         <div class="receive_box receive_method_bacs" style="display: none;"> *@
+@*                                             <h4 class="title">Chọn cửa hàng</h4> *@
+@*                                             <div class="form-row mb-12 flex"> *@
+@*                                                 <select id="MKSystemCityID" class="form-control" name="MKSystemCityID" placeholder="Khu Vực *"> *@
+@*                                                     <option value="">Khu vực</option> *@
+@*                                                     <option value="1">Miền Bắc</option> *@
+@*                                                     <option value="2">Miền Trung</option> *@
+@*                                                     <option value="3">Miền Nam</option> *@
+@*                                                 </select> *@
+@*                                                 <p class="err_show null">Địa chỉ không được để trống</p> *@
+@*                                             </div> *@
+@*                                             <div class="form-row mb-12 flex"> *@
+@*                                                 <select id="store_id" class="form-control" name="store_id" placeholder="Cửa hàng *"> *@
+@*                                                     <option data-region="0" value="0">Cửa hàng *</option> *@
+@*                                                     <option data-region="3" value="22">290A Xô Viết Nghệ Tĩnh, Phường 25, Bình Thạnh, Tp HCM - Ngã Tư Hàng Xanh</option> *@
+@*                                                     <option data-region="1" value="7">367 Cầu Giấy, Hà Nội:</option> *@
+@*                                                     <option data-region="3" value="1">379 Hoàng Văn Thụ, P2, Q.Tân Bình, HCM</option> *@
+@*                                                     <option data-region="1" value="8">111 Trần Đăng Ninh, Cầu Giấy, Hà Nội:</option> *@
+@*                                                     <option data-region="3" value="2">42 Trần Quang Khải , Tân Định , Quận 1, HCM</option> *@
+@*                                                     <option data-region="1" value="10">118 Thái hà, Đống Đa, Hà Nội:</option> *@
+@*                                                     <option data-region="3" value="3">499 Nguyễn Thị Thập, Q.7, HCM</option> *@
+@*                                                     <option data-region="1" value="12">312 Nguyễn Trãi, P.Trung Văn, Q.Nam Từ Liêm, Hà Nội (gần Đại Học Hà Nội)</option> *@
+@*                                                     <option data-region="3" value="4">466 Quang Trung, P.10, Q.Gò Vấp, HCM</option> *@
+@*                                                     <option data-region="1" value="9">446 Xã Đàn, Đống Đa, Hà Nội:</option> *@
+@*                                                     <option data-region="1" value="6">380 Trần Phú, Ba Đình, TP.Thanh Hóa:</option> *@
+@*                                                     <option data-region="3" value="17">269B Hậu Giang, P5, Q.6, HCM</option> *@
+@*                                                     <option data-region="1" value="13">Ngã 3 Đông Yên, Yên Phong, Bắc Ninh (Khu công nghiệp Yên Phong)</option> *@
+@*                                                     <option data-region="3" value="18">535 Lê Hồng Phong, Q.10, HCM</option> *@
+@*                                                     <option data-region="3" value="19">98 Võ Văn Ngân, TP.Thủ Đức, HCM</option> *@
+@*                                                     <option data-region="1" value="14">269 Nguyễn Hữu Tiến, TT Đồng Văn, Duy Tiên, Hà Nam</option> *@
+@*                                                     <option data-region="1" value="15">TTBH Hà Nội: Tầng 2, số 111 Trần Đăng Ninh, Cầu Giấy, Hà Nội</option> *@
+@*                                                     <option data-region="3" value="20">TTBH 1: 377 Hoàng Văn Thụ, P.2, Q.Tân Bình, HCM</option> *@
+@*                                                     <option data-region="3" value="21">TTBH 2: 98 Võ Văn Ngân, Tp.Thủ Đức, HCM</option> *@
+@*                                                     <option data-region="2" value="16">233 Lê Duẩn, TP Vinh, Nghệ An</option> *@
+@*                                                     <option data-region="2" value="11">161 Hàm Nghi, Q.Thanh Khê, TP.Đà Nẵng:</option> *@
+@*                                                 </select> *@
+@*                                             </div> *@
+@*                                             <div class="form-row ship-note mb-12 flex"> *@
+@* <textarea type="text" class="form-control ship_note" name="ship_note_bacs" placeholder="Ghi chú về đơn hàng" cols="5" rows="1"></textarea> *@
+@*                                             </div> *@
+@*                                         </div> *@
+@*                                     </div> *@
+@*                                 </div> *@
+@*                                 <div class="action"> *@
+@*                                     <p class="note">Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn đặt hàng của bạn, hỗ trợ trải nghiệm của bạn trên toàn bộ trang web và cho các mục đích khác được mô tả trong <a href="https://clickbuy.com.vn/" class="policy-link color-primary" target="_blank">chính sách riêng tư</a> của chúng tôi.</p> *@
+@*                                     <button type="button" class="js-add-to-cart alt quickbuy" name="checkout" id="btnSubInstallmentForm">Tiến hành đặt hàng</button> *@
+@*                                 </div> *@
+@*                             </form> *@
+@*                         </div> *@
+@*                     </div> *@
                 </div>
             </div>
         </div>
@@ -1404,121 +1404,121 @@ Giảm thêm 100.000đ khi mua kèm iPad/Apple Watch" autocomplete="off">
     <script>
         $(document).ready(function () {
             //Lấy tỉnh thành
-            var address = @Html.Raw(Json.Serialize(ViewBag.AddressParts));
-            var city = address[2].trim();
-            var district = address[1].trim();
-            var commune = address[0].trim();
-            console.log(address);
-            function loadDistricts(idtinh, selectedDistrict) {
-                $.getJSON('https://esgoo.net/api-tinhthanh/2/' + idtinh + '.htm', function (data_quan) {
-                    if (data_quan.error == 0) {
-                        $("#province_id").html('<option value="0">Quận Huyện</option>');
-                        $("#commune_id").html('<option value="0">Phường Xã</option>');
-                        $.each(data_quan.data, function (key_quan, val_quan) {
-                            $("#province_id").append('<option value="' + val_quan.id + '">' + val_quan.full_name + '</option>');
-                            if (selectedDistrict && val_quan.full_name.trim() === selectedDistrict.trim()) {
-                                $("#province_id").val(val_quan.id);
+            // var address = @Html.Raw(Json.Serialize(ViewBag.AddressParts));
+            // var city = address[2].trim();
+            // var district = address[1].trim();
+            // var commune = address[0].trim();
+            // console.log(address);
+            // function loadDistricts(idtinh, selectedDistrict) {
+            //     $.getJSON('https:esgoo.net/api-tinhthanh/2/' + idtinh + '.htm', function (data_quan) {
+            //         if (data_quan.error == 0) {
+            //             $("#province_id").html('<option value="0">Quận Huyện</option>');
+            //             $("#commune_id").html('<option value="0">Phường Xã</option>');
+            //             $.each(data_quan.data, function (key_quan, val_quan) {
+            //                 $("#province_id").append('<option value="' + val_quan.id + '">' + val_quan.full_name + '</option>');
+            //                 if (selectedDistrict && val_quan.full_name.trim() === selectedDistrict.trim()) {
+            //                     $("#province_id").val(val_quan.id);
 
-                                $("#huyen").val(val_quan.full_name.trim());
-                                loadCommunes(val_quan.id, commune);
-                            }
-                        });
-                    }
-                });
-            }
+            //                     $("#huyen").val(val_quan.full_name.trim());
+            //                     loadCommunes(val_quan.id, commune);
+            //                 }
+            //             });
+            //         }
+            //     });
+            // }
 
-            function loadCommunes(idquan, selectedCommune) {
-                $.getJSON('https://esgoo.net/api-tinhthanh/3/' + idquan + '.htm', function (data_phuong) {
-                    if (data_phuong.error == 0) {
-                        $("#commune_id").html('<option value="0">Phường Xã</option>');
-                        $.each(data_phuong.data, function (key_phuong, val_phuong) {
-                            $("#commune_id").append('<option value="' + val_phuong.id + '">' + val_phuong.full_name + '</option>');
-                            if (selectedCommune && val_phuong.full_name.trim() === selectedCommune.trim()) {
-                                $("#commune_id").val(val_phuong.id);
+            // function loadCommunes(idquan, selectedCommune) {
+            //     $.getJSON('https:esgoo.net/api-tinhthanh/3/' + idquan + '.htm', function (data_phuong) {
+            //         if (data_phuong.error == 0) {
+            //             $("#commune_id").html('<option value="0">Phường Xã</option>');
+            //             $.each(data_phuong.data, function (key_phuong, val_phuong) {
+            //                 $("#commune_id").append('<option value="' + val_phuong.id + '">' + val_phuong.full_name + '</option>');
+            //                 if (selectedCommune && val_phuong.full_name.trim() === selectedCommune.trim()) {
+            //                     $("#commune_id").val(val_phuong.id);
 
-                                $("#xa").val(val_phuong.full_name.trim());
-                            }
-                        });
-                    }
-                });
-            }
+            //                     $("#xa").val(val_phuong.full_name.trim());
+            //                 }
+            //             });
+            //         }
+            //     });
+            // }
 
-            $.getJSON('https://esgoo.net/api-tinhthanh/1/0.htm', function (data_tinh) {
-                console.log(data_tinh);
-                if (data_tinh.error == 0) {
-                    $("#city_id").html('<option value="">Chọn tỉnh/thành phố</option>');
-                    $.each(data_tinh.data, function (key_tinh, val_tinh) {
-                        $("#city_id").append('<option value="' + val_tinh.id + '">' + val_tinh.full_name + '</option>');
-                        if (val_tinh.full_name.trim() === city) {
-                            $("#city_id").val(val_tinh.id);
+            // $.getJSON('https:esgoo.net/api-tinhthanh/1/0.htm', function (data_tinh) {
+            //     console.log(data_tinh);
+            //     if (data_tinh.error == 0) {
+            //         $("#city_id").html('<option value="">Chọn tỉnh/thành phố</option>');
+            //         $.each(data_tinh.data, function (key_tinh, val_tinh) {
+            //             $("#city_id").append('<option value="' + val_tinh.id + '">' + val_tinh.full_name + '</option>');
+            //             if (val_tinh.full_name.trim() === city) {
+            //                 $("#city_id").val(val_tinh.id);
 
-                            $("#tinh").val(val_tinh.full_name.trim());
-                            loadDistricts(val_tinh.id, district);
-                        }
-                    });
-                }
-            });
+            //                 $("#tinh").val(val_tinh.full_name.trim());
+            //                 loadDistricts(val_tinh.id, district);
+            //             }
+            //         });
+            //     }
+            // });
 
-            $("#city_id").change(function (e) {
-                var idtinh = $(this).val();
-                var selectedText = $("#city_id option:selected").text();
-                $("#tinh").val(selectedText);
-                $('#huyen').val('');
-                $('#xa').val('');
-                if (idtinh) {
-                    loadDistricts(idtinh, null);
-                }
-            });
+            // $("#city_id").change(function (e) {
+            //     var idtinh = $(this).val();
+            //     var selectedText = $("#city_id option:selected").text();
+            //     $("#tinh").val(selectedText);
+            //     $('#huyen').val('');
+            //     $('#xa').val('');
+            //     if (idtinh) {
+            //         loadDistricts(idtinh, null);
+            //     }
+            // });
 
-            $("#province_id").change(function (e) {
-                var idquan = $(this).val();
-                var selectedText = $("#province_id option:selected").text();
-                $("#huyen").val(selectedText);
-                if (idquan) {
-                    loadCommunes(idquan, null);
-                }
-            });
+            // $("#province_id").change(function (e) {
+            //     var idquan = $(this).val();
+            //     var selectedText = $("#province_id option:selected").text();
+            //     $("#huyen").val(selectedText);
+            //     if (idquan) {
+            //         loadCommunes(idquan, null);
+            //     }
+            // });
 
-            $("#commune_id").change(function (e) {
-                var selectedText = $("#commune_id option:selected").text();
-                $("#xa").val(selectedText);
-            });
+            // $("#commune_id").change(function (e) {
+            //     var selectedText = $("#commune_id option:selected").text();
+            //     $("#xa").val(selectedText);
+            // });
 
 
-            console.log($('#QuickOrderForm'));
-            $('#QuickOrderForm').validate({
-                errorClass: 'error',
-                rules: {
-                    name: {
-                        required: true,
-                        minlength: 10
-                    },
-                    phone: {
-                        required: true,
-                        minlength: 10,
-                        Number: true
-                    },
-                    email: {
-                        required: true,
-                        email: true
-                    }
-                },
-                messages: {
-                    name: {
-                        required: "Bạn phải nhập tên !",
-                        minlength: "Tên phải lớn hơn 10 kí tự !"
-                    },
-                    phone: {
-                        required: "Bạn phải nhập số điện thoại !",
-                        minlength: "Số điện thoại không đúng !",
-                        Number: "Số điện thoại không đúng định dạng !"
-                    },
-                    email: {
-                        required: "Bạn phải nhập email !",
-                        email: "Email không đúng định dạng !"
-                    }
-                }
-            });
+            // console.log($('#QuickOrderForm'));
+            // $('#QuickOrderForm').validate({
+            //     errorClass: 'error',
+            //     rules: {
+            //         name: {
+            //             required: true,
+            //             minlength: 10
+            //         },
+            //         phone: {
+            //             required: true,
+            //             minlength: 10,
+            //             Number: true
+            //         },
+            //         email: {
+            //             required: true,
+            //             email: true
+            //         }
+            //     },
+            //     messages: {
+            //         name: {
+            //             required: "Bạn phải nhập tên !",
+            //             minlength: "Tên phải lớn hơn 10 kí tự !"
+            //         },
+            //         phone: {
+            //             required: "Bạn phải nhập số điện thoại !",
+            //             minlength: "Số điện thoại không đúng !",
+            //             Number: "Số điện thoại không đúng định dạng !"
+            //         },
+            //         email: {
+            //             required: "Bạn phải nhập email !",
+            //             email: "Email không đúng định dạng !"
+            //         }
+            //     }
+            // });
             function AddCart(id) {
                         console.log(id);
                 $.ajax({
@@ -1542,6 +1542,9 @@ Giảm thêm 100.000đ khi mua kèm iPad/Apple Watch" autocomplete="off">
                                 backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
                                 duration: 3000
                             }).showToast();
+                        }
+                        else if(response.status == 401){
+                            window.location.href = response.redirectUrl;
                         }
                         else {
                             Toastify({
@@ -1624,7 +1627,7 @@ Giảm thêm 100.000đ khi mua kèm iPad/Apple Watch" autocomplete="off">
             var activeDiv = $('.list-variant__item.active');
             var dataId = activeDiv.data('id');
             $('#inp-storageId').val(dataId);
-            if(@user.Id === null){
+            if(1 === null){
                console.log("dont have user")
             }else{
                 console.log("have user")

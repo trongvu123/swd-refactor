@@ -1,0 +1,50 @@
+﻿@model IEnumerable<SonicStore.Repository.Entity.Promotion>
+@{
+    Layout = "_LayoutSale";
+}
+@{
+    ViewData["Title"] = "Promotion Dashboard";
+}
+
+<h1>Promotion Dashboard</h1>
+
+<p>
+    <a asp-action="AddPromotion" class="btn btn-primary">Thêm Khuyến Mãi Mới</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã Khuyến mại</th>
+            <th>Tên</th>
+            <th>Ngày bắt đầu</th>
+            <th>Ngày kết thúc</th>
+            <th>Mua tối thiểu</th>
+            <th>Ngày tạo</th>
+            <th>Ngày chỉnh sửa</th>
+            <th>Người tạo</th>
+            <th>Người chỉnh sửa</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var promotion in Model)
+        {
+            <tr>
+                <td>@promotion.PromotionId</td>
+                <td>@promotion.PromotionName</td>
+                <td>@promotion.StartDate?.ToString("dd/MM/yyyy")</td>
+                <td>@promotion.EndDate?.ToString("dd/MM/yyyy")</td>
+                <td>@promotion.MinimumPurchase?.ToString("C")</td>
+                <td>@promotion.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@promotion.UpdatedAt?.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@promotion.CreatedByUser?.FullName</td>
+                <td>@promotion.UpdatedByUser?.FullName</td>
+                <td>
+                    <a asp-action="EditPromotion" asp-route-id="@promotion.PromotionId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="DeletePromotion" asp-route-id="@promotion.PromotionId" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this promotion?')">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

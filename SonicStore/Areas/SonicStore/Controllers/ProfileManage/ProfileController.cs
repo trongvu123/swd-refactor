@@ -5,8 +5,7 @@ using SonicStore.Repository.Entity;
 using System.Net.Mail;
 using System.Net;
 using Microsoft.AspNetCore.Authorization;
-using SonicStore.Areas.SonicStore.Utils;
-
+using SonicStore.Common.Utils;
 namespace SonicStore.Areas.SonicStore.Controllers.ProfileManage
 {
     [Authorize]
@@ -254,6 +253,7 @@ namespace SonicStore.Areas.SonicStore.Controllers.ProfileManage
             });
             HttpContext.Session.SetString("user", updatedUserJson);
         }
+        EncriptPassword encript = new EncriptPassword();
         [HttpPost("old-password")]
         public async Task<JsonResult> OldPassword(string password)
         {
@@ -263,7 +263,7 @@ namespace SonicStore.Areas.SonicStore.Controllers.ProfileManage
                 var userJson = HttpContext.Session.GetString("user");
                 var userSession = JsonConvert.DeserializeObject<User>(userJson);
                 var passwordCheck = await _context.Accounts.Include(u => u.User).Where(c => c.User.Id == userSession.Id).FirstAsync();
-                if (!EncriptPassword.VerifyPassword(password, passwordCheck.Password))
+                if (!encript.VerifyPassword(password, passwordCheck.Password))
                 {
                     status = 2;
                     return Json(new { status = status });
@@ -283,7 +283,7 @@ namespace SonicStore.Areas.SonicStore.Controllers.ProfileManage
             var userJson = HttpContext.Session.GetString("user");
             var userSession = JsonConvert.DeserializeObject<User>(userJson);
             var account = await _context.Accounts.Where(c => c.User.Id == userSession.Id).FirstAsync();
-            account.Password = EncriptPassword.HashPassword(password);
+            account.Password = encript.HashPassword(password);
             _context.Accounts.Update(account);
             await _context.SaveChangesAsync();
             return Json(new { status = status });

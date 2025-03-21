@@ -44,7 +44,7 @@ public partial class SonicStoreContext : DbContext
 
     public virtual DbSet<Campaign> Campaigns { get; set; }
 
-    public virtual DbSet<Budget> Budgets { get; set; }  
+    public virtual DbSet<Budget> Budgets { get; set; }
 
     public virtual DbSet<Promotion> Promotion { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -130,7 +130,30 @@ public partial class SonicStoreContext : DbContext
                 .HasConstraintName("FK__Product_I__produ__4CF5691D");
         });
 
+        modelBuilder.Entity<Promotion>()
+                .HasOne(p => p.CreatedByUser)
+                .WithMany(u => u.CreatedPromotions)
+                .HasForeignKey(p => p.CreatedBy)
+                .OnDelete(DeleteBehavior.Cascade); // OK to cascade delete from creator
 
+        modelBuilder.Entity<Promotion>()
+            .HasOne(p => p.UpdatedByUser)
+            .WithMany(u => u.UpdatedPromotions)
+            .HasForeignKey(p => p.UpdatedBy)
+            .OnDelete(DeleteBehavior.NoAction); // Prevent cascade from updater
+        modelBuilder.Entity<Promotion>()
+            .Property(p => p.MinimumPurchase)
+            .HasPrecision(10, 2); // 10 total digits, 2 after decimal (e.g., 12345678.90)
+        // Optionally, configure User self-reference
+        modelBuilder.Entity<User>()
+            .HasOne(u => u.Account)
+            .WithOne(a => a.User)
+            .HasForeignKey<User>(u => u.AccountId);
+
+        modelBuilder.Entity<User>()
+            .HasOne(u => u.Role)
+            .WithMany(r => r.Users)
+            .HasForeignKey(u => u.RoleId);
 
         modelBuilder.Entity<Role>(entity =>
         {
@@ -161,6 +184,45 @@ public partial class SonicStoreContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__User_Addr__user___4183B671");
         });
+        modelBuilder.Entity<Promotion>()
+                .HasOne(p => p.CreatedByUser)
+                .WithMany(u => u.CreatedPromotions)
+                .HasForeignKey(p => p.CreatedBy)
+                .OnDelete(DeleteBehavior.Cascade); // Cascade delete for creator
+
+        // User -> Promotion (UpdatedBy)
+        modelBuilder.Entity<Promotion>()
+            .HasOne(p => p.UpdatedByUser)
+            .WithMany(u => u.UpdatedPromotions)
+            .HasForeignKey(p => p.UpdatedBy)
+            .OnDelete(DeleteBehavior.NoAction); // No cascade for updater
+
+        // User self-reference (UpdateBy)
+        modelBuilder.Entity<User>()
+            .HasOne(u => u.Account)
+            .WithOne(a => a.User)
+            .HasForeignKey<User>(u => u.AccountId);
+
+        modelBuilder.Entity<User>()
+            .HasOne(u => u.Role)
+            .WithMany(r => r.Users)
+            .HasForeignKey(u => u.RoleId);
+
+        // Apply unique constraints from User entity
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.AccountId)
+            .IsUnique()
+            .HasDatabaseName("UQ__User__46A222CC47970D57");
+
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Email)
+            .IsUnique()
+            .HasDatabaseName("UQ__User__AB6E6164D8A3A270");
+
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Phone)
+            .IsUnique()
+            .HasDatabaseName("UQ__User__B43B145F81F86A8C");
 
 
         OnModelCreatingPartial(modelBuilder);

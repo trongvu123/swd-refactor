@@ -46,10 +46,6 @@
 		<PackageReference Include="MimeKit" Version="4.6.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\images\Slider\" />
-  </ItemGroup>
 	<ItemGroup>
 		<Folder Include="wwwroot\images\productimg\" />
 		<Folder Include="wwwroot\img\" />

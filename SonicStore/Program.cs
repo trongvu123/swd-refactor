@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using SonicStore.Business.Service;
+using SonicStore.Common.Utils;
 using SonicStore.Repository.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,7 +32,22 @@ builder.Services.AddDbContext<SonicStore.Repository.Entity.SonicStoreContext>(op
     string connectionString = builder.Configuration.GetConnectionString("SonicStore")!;
     options.UseSqlServer(connectionString);
 });
-
+// Đăng ký các Repository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IUserAddressRepository, UserAddressRepository>();
+builder.Services.AddScoped<IPromotionRepository, PromotionRepository>();
+// Đăng ký các Service
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IForgotPasswordService, ForgotPasswordService>();
+builder.Services.AddScoped<IRegisterService, RegisterService>();
+builder.Services.AddScoped<IPromotionService, PromotionService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderListService, OrderListService  >();
+builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
+// Đăng ký các Utility
+builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<EncriptPassword>();
 builder.Services.AddSingleton<IVnPayService, VnPayService>();
 builder.Services.AddScoped<ICheckoutRepository, CheckoutRepository>();
 builder.Services.AddScoped<IUserAddressRepository, UserAddressRepository>();

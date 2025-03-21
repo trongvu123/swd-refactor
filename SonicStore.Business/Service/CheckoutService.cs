@@ -9,11 +9,15 @@ public class CheckoutService : ICheckoutService
 {
     private readonly ICheckoutRepository _checkoutRepository;
     private readonly IVnPayService _vnPayService;
+    private readonly ICartRepository _cartRepository;
+    private readonly IUserAddressRepository _userAddressRepository;
 
-    public CheckoutService(ICheckoutRepository checkoutRepository, IVnPayService vnPayService)
+    public CheckoutService(ICheckoutRepository checkoutRepository, IVnPayService vnPayService, ICartRepository cartRepository, IUserAddressRepository userAddressRepository)
     {
         _checkoutRepository = checkoutRepository;
         _vnPayService = vnPayService;
+        _cartRepository = cartRepository; 
+        _userAddressRepository = userAddressRepository;
     }
 
     public async Task<CheckoutResponseDto> ProcessCheckoutAsync(CheckoutRequestDto request, HttpContext httpContext)
@@ -336,5 +340,20 @@ public class CheckoutService : ICheckoutService
         {
             throw new Exception($"Error processing payment success: {ex.Message}", ex);
         }
+    }
+
+    public List<Cart> GetCartIncludeInventoryAndProduct()
+    {
+        return _cartRepository.GetCartIncludeInventoryAndProduct();
+    }
+
+    public Task<List<Cart>> GetCartIncludeInventoryAndProductHaveAddressCondition(List<int> cartIds)
+    {
+        return _cartRepository.GetCartIncludeInventoryAndProductHaveAddressCondition(cartIds);
+    }
+
+    public Task<UserAddress> GetUserAddressActive(int userId)
+    {
+        return _userAddressRepository.GetUserAddressActive(userId);
     }
 }

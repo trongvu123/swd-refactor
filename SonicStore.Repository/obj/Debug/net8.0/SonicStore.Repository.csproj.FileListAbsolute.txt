@@ -15,3 +15,6 @@ D:\swd\SonicStore.Repository\obj\Debug\net8.0\SonicStore.Repository.pdb
 D:\swd\SonicStore.Repository\obj\Debug\net8.0\SonicStore.Repository.genruntimeconfig.cache
 D:\swd\SonicStore.Repository\obj\Debug\net8.0\ref\SonicStore.Repository.dll
 D:\swd\SonicStore.Repository\obj\Debug\net8.0\SonicStore.Repository.sourcelink.json
+D:\swd\SonicStore.Repository\bin\Debug\net8.0\SonicStore.Common.dll
+D:\swd\SonicStore.Repository\bin\Debug\net8.0\SonicStore.Common.pdb
+D:\swd\SonicStore.Repository\obj\Debug\net8.0\SonicSto.B3CC6AE0.Up2Date

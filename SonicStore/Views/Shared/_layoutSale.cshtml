@@ -104,6 +104,10 @@
                             Danh sách đơn hàng
                         </a>
 
+                        <a asp-action="PromotionScreen" asp-controller="Promotion" class="nav-link collapsed @(Url.RouteUrl(ViewContext.RouteData.Values) == "/promotion" ? "active" : "")">
+                            <div class="nav-link-icon action"><i data-feather="package"></i></div>
+                            Danh sách khuyến mại
+                        </a>
                     </div>
                 </div>
                 <!-- Sidenav Footer-->

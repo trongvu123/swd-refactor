@@ -52,46 +52,46 @@
                             <div class="form-controls">
                                 <label for="Username" class="sr-only">Tên đăng nhập</label>
                                 <div class="controls">
-                                    <input type="text" name="accounts.Username" required />
+                                    <input type="text" name="AccountModel.Username" required />
                                 </div>
                             </div>
 
                             <div class="form-controls">
                                 <label for="Password" class="sr-only">Mật khẩu</label>
                                 <div class="controls">
-                                    <input type="password" name="accounts.Password" required />
+                                    <input type="password" name="AccountModel.Password" required />
                                 </div>
                             </div>
 
                             <div class="form-controls">
                                 <label for="FullName" class="sr-only">Họ và tên</label>
                                 <div class="controls">
-                                    <input type="text" name="users.FullName" required />
+                                    <input type="text" name="UserModel.FullName" required />
                                 </div>
                             </div>
                             <div class="form-controls">
                                 <label for="Phone" class="sr-only">Số điện thoại</label>
                                 <div class="controls">
-                                    <input type="text" name="users.Phone" id="Phone" required />
+                                    <input type="text" name="UserModel.Phone" id="Phone" required />
                                 </div>
                             </div>
                             <div class="form-controls">
                                 <label for="Email" class="sr-only">Email</label>
                                 <div class="controls">
-                                    <input type="email" name="users.Email" required />
+                                    <input type="email" name="UserModel.Email" required />
                                 </div>
                             </div>
                             <div class="form-controls">
                                 <label for="Gender" class="sr-only">Giới tính</label>
                                 <div class="controls">
                                     <label class="radio-ctn">
-                                        <input type="radio" name="users.Gender" value="true" />
+                                        <input type="radio" name="UserModel.Gender" value="true" />
                                         <span class="checkmark"></span>
                                         <span><strong>Nam</strong></span>
                                     </label>
 
                                     <label class="radio-ctn">
-                                        <input type="radio" name="users.Gender" value="false" />
+                                        <input type="radio" name="UserModel.Gender" value="false" />
                                         <span class="checkmark"></span>
                                         <span><strong>Nữ</strong></span>
                                     </label>
@@ -100,7 +100,7 @@
                             <div class="form-controls">
                                 <label for="Dob" class="sr-only">Ngày sinh</label>
                                 <div class="controls">
-                                    <input type="text" id="datepicker" style="width: 350px;" name="users.Dob" required />
+                                    <input type="text" id="datepicker" style="width: 350px;" name="UserModel.Dob" required />
                                 </div>
                             </div>
 
@@ -216,7 +216,7 @@
                     var city = $("#SystemCityID").val();
                     var district = $("#SystemDistrictID").val();
                     var commune = $("#SystemCommuneID").val();
-                    var gender = $("input[name='users.Gender']:checked").val();
+                    var gender = $("input[name='UserModel.Gender']:checked").val();
                     var errorMessage = "";
 
 

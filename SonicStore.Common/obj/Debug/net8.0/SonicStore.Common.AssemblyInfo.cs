@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SonicStore.Common")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3949d4ad651b02f5fdd45dcf0626503fba5d28a3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a822d21f7a3e056ada4376c3bb4cda83cdc2e73")]
 [assembly: System.Reflection.AssemblyProductAttribute("SonicStore.Common")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SonicStore.Common")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

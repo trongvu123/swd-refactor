@@ -280,7 +280,7 @@ namespace SonicStore.Repository.Migrations
                     b.HasIndex("PaymentId")
                         .IsUnique();
 
-                    b.ToTable("Checkout");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("SonicStore.Repository.Entity.Inventory", b =>
@@ -424,6 +424,58 @@ namespace SonicStore.Repository.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Product_Image");
+                });
+
+            modelBuilder.Entity("SonicStore.Repository.Entity.Promotion", b =>
+                {
+                    b.Property<int>("PromotionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("promotion_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PromotionId"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_at");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("end_date");
+
+                    b.Property<decimal?>("MinimumPurchase")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("minimum_purchase");
+
+                    b.Property<string>("PromotionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("promotion_name");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("start_date");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updated_at");
+
+                    b.Property<int>("UpdatedBy")
+                        .HasColumnType("int")
+                        .HasColumnName("updated_by");
+
+                    b.HasKey("PromotionId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("UpdatedBy");
+
+                    b.ToTable("Promotion");
                 });
 
             modelBuilder.Entity("SonicStore.Repository.Entity.Role", b =>
@@ -587,6 +639,18 @@ namespace SonicStore.Repository.Migrations
                     b.HasKey("Id")
                         .HasName("PK__User__3213E83FD23B5FEA");
 
+                    b.HasIndex("AccountId")
+                        .IsUnique()
+                        .HasDatabaseName("UQ__User__46A222CC47970D57");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasDatabaseName("UQ__User__AB6E6164D8A3A270");
+
+                    b.HasIndex("Phone")
+                        .IsUnique()
+                        .HasDatabaseName("UQ__User__B43B145F81F86A8C");
+
                     b.HasIndex("RoleId");
 
                     b.HasIndex(new[] { "AccountId" }, "UQ__User__46A222CC47970D57")
@@ -739,6 +803,25 @@ namespace SonicStore.Repository.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("SonicStore.Repository.Entity.Promotion", b =>
+                {
+                    b.HasOne("SonicStore.Repository.Entity.User", "CreatedByUser")
+                        .WithMany("CreatedPromotions")
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SonicStore.Repository.Entity.User", "UpdatedByUser")
+                        .WithMany("UpdatedPromotions")
+                        .HasForeignKey("UpdatedBy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CreatedByUser");
+
+                    b.Navigation("UpdatedByUser");
+                });
+
             modelBuilder.Entity("SonicStore.Repository.Entity.StatusOrder", b =>
                 {
                     b.HasOne("SonicStore.Repository.Entity.Checkout", "Order")
@@ -849,7 +932,11 @@ namespace SonicStore.Repository.Migrations
                 {
                     b.Navigation("Campaigns");
 
+                    b.Navigation("CreatedPromotions");
+
                     b.Navigation("OrderDetails");
+
+                    b.Navigation("UpdatedPromotions");
 
                     b.Navigation("UserAddresses");
                 });

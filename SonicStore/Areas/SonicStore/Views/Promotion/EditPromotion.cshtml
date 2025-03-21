@@ -1,0 +1,37 @@
+﻿@model SonicStore.Repository.Entity.Promotion
+@{
+    Layout = "_LayoutSale";
+}
+@{
+    ViewData["Title"] = "Edit Promotion";
+}
+
+<h1>Chỉnh sửa Khuyến mãi</h1>
+
+<form asp-action="EditPromotion" method="post">
+    <input type="hidden" asp-for="PromotionId" />
+    <div class="form-group">
+        <label asp-for="PromotionName" class="control-label"></label>
+        <input asp-for="PromotionName" class="form-control" required />
+        <span asp-validation-for="PromotionName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StartDate" class="control-label"></label>
+        <input asp-for="StartDate" class="form-control" type="date" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EndDate" class="control-label"></label>
+        <input asp-for="EndDate" class="form-control" type="date" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MinimumPurchase" class="control-label"></label>
+        <input asp-for="MinimumPurchase" class="form-control" type="number" step="0.01" />
+        <span asp-validation-for="MinimumPurchase" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="PromotionScreen" class="btn btn-secondary">Cancel</a>
+    </div>
+</form> 
