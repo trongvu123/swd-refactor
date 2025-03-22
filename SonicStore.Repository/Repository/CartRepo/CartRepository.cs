@@ -36,15 +36,6 @@ public class CartRepository : ICartRepository
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 
-    public async Task<Inventory> GetProductOptionByCartId(int id)
-    {
-        return await _context.OrderDetails
-            .Include(o => o.Storage)
-            .Where(o => o.Id == id)
-            .Select(o => o.Storage)
-            .FirstOrDefaultAsync();
-    }
-
     public async Task<double?> GetUnitPrice(int storageId)
     {
         return await _context.OrderDetails
@@ -78,4 +69,22 @@ public class CartRepository : ICartRepository
     {
         await _context.OrderDetails.AddAsync(cartItem);
     }
+
+    public async Task<List<Cart>> GetAllCartItemInCludeInfo(int customerId)
+    {
+        return await _context.OrderDetails
+            .Where(od => od.CustomerId == customerId && od.Status == "cart" && od.Storage.Product.Status == true)
+            .Include(u => u.User)
+            .Include(u => u.UserAddress)
+            .Include(s => s.Storage)
+            .ThenInclude(p => p.Product)
+            .ToListAsync();
+    }
+
+    public async Task<List<Cart>> GetCartItemsSessionAsync(List<int> cartIds)=>
+       await _context.OrderDetails
+            .Include(o => o.Storage)
+            .ThenInclude(o => o.Product)
+            .Where(o => cartIds.Contains(o.Id))
+            .ToListAsync();
 }

@@ -30,12 +30,14 @@ public class UserAddressRepository : BaseRepository, IUserAddressRepository
     public async Task<bool> AddUserAddressAsync(UserAddress userAddress)
     {
         await _context.UserAddresses.AddAsync(userAddress);
-        return await SaveChangesAsync();
+        await _context.SaveChangesAsync();
+        return true;
     }
 
     public async Task<bool> UpdateUserAddressAsync(UserAddress userAddress)
     {
         _context.UserAddresses.Update(userAddress);
-        return await SaveChangesAsync();
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

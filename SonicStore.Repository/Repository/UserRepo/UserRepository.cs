@@ -51,13 +51,15 @@ namespace SonicStore.Repository.Repository.UserRepo
         public async Task<bool> AddUserAsync(User user)
         {
             await _context.Users.AddAsync(user);
-            return await SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> UpdateUserAsync(User user)
         {
             _context.Users.Update(user);
-            return await SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

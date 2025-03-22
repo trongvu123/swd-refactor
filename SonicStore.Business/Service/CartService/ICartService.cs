@@ -8,6 +8,8 @@ public interface ICartService
 
     Task<Cart> GetCartItemByUser(int userId, int optionId);
 
+    Task<List<Cart>> GetAllCartIncludeInfo(int customerId);
+
     Task<Inventory> GetInventoryOption(int id);
 
     Task<UserAddress> GetUserAddress(int userId);

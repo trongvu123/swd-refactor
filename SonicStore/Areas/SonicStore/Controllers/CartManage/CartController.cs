@@ -14,12 +14,12 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
     [Area("SonicStore")]
     public class CartController : Controller
     {
-        private readonly SonicStoreContext _context;
+
         private readonly ICartService _cartService;
 
-        public CartController(SonicStoreContext context, ICartService cartService)
+        public CartController( ICartService cartService)
         {
-            _context = context;
+ 
             _cartService = cartService;
         }
 
@@ -28,10 +28,9 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
         {
             var userJson = HttpContext.Session.GetString("user");
             var userSession = JsonConvert.DeserializeObject<User>(userJson);
-            var user = _context.Users.FirstOrDefault();
             var addressUser = await _cartService.GetUserAddress(userSession.Id);
             ViewBag.AddressUser = addressUser;
-            ViewBag.user = user;
+            ViewBag.user = userSession;
             return View();
         }
 
@@ -98,10 +97,8 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
 			{
 				listSession = JsonConvert.DeserializeObject<List<int>>(listJson) ?? new List<int>();
 			}
-			var listCartItem = await _context.OrderDetails.Where(od => od.CustomerId == userSession.Id && od.Status=="cart" && od.Storage.Product.Status == true).Include(u => u.User)
-	                            .Include(u => u.UserAddress)
-	                            .Include(s => s.Storage)
-	                            .ThenInclude(p => p.Product)
+            var listCartInclude = await _cartService.GetAllCartIncludeInfo(userSession.Id);
+			var listCartItem = listCartInclude
                                 .Select(c=> new
                                 {
                                     c.Id,
@@ -114,7 +111,7 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
                                     c.Quantity,
 									isCheck = listSession.Contains(c.Id)
 								})
-	                            .ToListAsync();
+	                            ;
             return Json(new { data = listCartItem , status = true});
 		}
         [HttpPost("update-quantity")]
@@ -151,5 +148,6 @@ namespace SonicStore.Areas.SonicStore.Controllers.CartManage
 
             return Ok(new { redirectUrl = Url.Action("CheckoutScreen", "Checkout") });
         }
+
     }
 }

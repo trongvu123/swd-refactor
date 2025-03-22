@@ -11,21 +11,12 @@ public class CheckoutRepository : ICheckoutRepository
         _context = context;
     }
 
-    public async Task<User> GetUserAsync(string userId) =>
-        await _context.Users.FirstOrDefaultAsync(u => u.Id.ToString() == userId);
-
-    public async Task<UserAddress> GetUserAddressAsync(string userId) =>
-        await _context.UserAddresses.FirstOrDefaultAsync(u => u.UserId.ToString() == userId && u.Status);
-
     public async Task<List<Cart>> GetCartItemsAsync(List<int> cartIds) =>
         await _context.OrderDetails
             .Include(o => o.Storage)
             .ThenInclude(o => o.Product)
             .Where(o => cartIds.Contains(o.Id))
             .ToListAsync();
-
-    public async Task<Inventory> GetStorageAsync(int storageId) =>
-        await _context.Storages.FirstOrDefaultAsync(s => s.Id == storageId);
 
     public async Task<int> SaveOrderAsync(Cart cart, Payment payment, Checkout checkout,
         StatusPayment statusPayment, StatusOrder statusOrder)
@@ -71,18 +62,6 @@ public class CheckoutRepository : ICheckoutRepository
         }
     }
 
-    public async Task UpdateStorageAsync(Inventory storage)
-    {
-        try
-        {
-            _context.Storages.Update(storage);
-            await _context.SaveChangesAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-    }
     public async Task<int> GetOrderCountAsync()
     {
         return await _context.Orders.CountAsync();
@@ -91,17 +70,5 @@ public class CheckoutRepository : ICheckoutRepository
     public async Task<int> GetMaxOrderIndexAsync()
     {
         return await _context.Orders.MaxAsync(o => o.index);
-    }
-    public async Task UpdateUserAddressAsync(UserAddress address)
-    {
-        try
-        {
-            _context.UserAddresses.Update(address);
-            await _context.SaveChangesAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
     }
 }

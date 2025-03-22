@@ -5,7 +5,9 @@ using SonicStore.Business.Service.VnPayService;
 using SonicStore.Repository.Entity;
 using SonicStore.Repository.Repository.CartRepo;
 using SonicStore.Repository.Repository.CheckoutRepo;
+using SonicStore.Repository.Repository.InventoryRepo;
 using SonicStore.Repository.Repository.UserAddressRepo;
+using SonicStore.Repository.Repository.UserRepo;
 
 namespace SonicStore.Business.Service.CheckoutService;
 public class CheckoutService : ICheckoutService
@@ -14,13 +16,16 @@ public class CheckoutService : ICheckoutService
     private readonly IVnPayService _vnPayService;
     private readonly ICartRepository _cartRepository;
     private readonly IUserAddressRepository _userAddressRepository;
-
-    public CheckoutService(ICheckoutRepository checkoutRepository, IVnPayService vnPayService, ICartRepository cartRepository, IUserAddressRepository userAddressRepository)
+    private readonly IUserRepository _userRepository;
+    private readonly IInventoryRepository _inventoryRepository;
+    public CheckoutService(ICheckoutRepository checkoutRepository, IVnPayService vnPayService, ICartRepository cartRepository, IUserAddressRepository userAddressRepository, IUserRepository userRepository, IInventoryRepository inventoryRepository)
     {
         _checkoutRepository = checkoutRepository;
         _vnPayService = vnPayService;
         _cartRepository = cartRepository;
         _userAddressRepository = userAddressRepository;
+        _userRepository = userRepository;
+        _inventoryRepository = inventoryRepository;
     }
 
     public async Task<CheckoutResponseDto> ProcessCheckoutAsync(CheckoutRequestDto request, HttpContext httpContext)
@@ -37,8 +42,8 @@ public class CheckoutService : ICheckoutService
             return new CheckoutResponseDto { Success = false, Message = "User session not found" };
 
         var user = JsonConvert.DeserializeObject<User>(userJson);
-        var cartItems = await _checkoutRepository.GetCartItemsAsync(request.CartIds);
-
+        var cartItems = await _cartRepository.GetCartItemsSessionAsync(request.CartIds);
+        
         if (!cartItems.Any())
             return new CheckoutResponseDto { Success = false, Message = "No items to checkout" };
 
@@ -92,19 +97,18 @@ public class CheckoutService : ICheckoutService
             return new CheckoutResponseDto { Success = false, Message = "User session not found" };
 
         var user = JsonConvert.DeserializeObject<User>(userJson);
-        var storage = await _checkoutRepository.GetStorageAsync(request.StorageId);
-
+        var storage = await _inventoryRepository.GetInventoryById(request.StorageId); 
         if (storage == null || storage.quantity <= 0)
             return new CheckoutResponseDto { Success = false, Message = "Product out of stock" };
 
-        var userAddress = await _checkoutRepository.GetUserAddressAsync(user.Id.ToString());
+        var userAddress = await _userAddressRepository.GetUserAddressByIdAsync(user.Id);
+        
         if (userAddress == null)
             return new CheckoutResponseDto { Success = false, Message = "User address not found" };
 
         // Update address
         userAddress.User_Address = $"{request.Xa}, {request.Huyen}, {request.Tinh}";
-        await _checkoutRepository.UpdateUserAddressAsync(userAddress);
-
+        await _userAddressRepository.UpdateUserAddressAsync(userAddress);
         if (request.ReceiveTypeId == 1) // COD
         {
             var cart = new Cart
@@ -227,12 +231,12 @@ public class CheckoutService : ICheckoutService
         {
             foreach (var cart in cartItems)
             {
-                var storage = await _checkoutRepository.GetStorageAsync(cart.StorageId);
+                var storage = await _inventoryRepository.GetInventoryById(cart.StorageId);
+
                 if (storage != null && storage.quantity >= cart.Quantity)
                 {
                     storage.quantity -= (int)cart.Quantity;
-                    await _checkoutRepository.UpdateStorageAsync(storage);
-
+                    await _inventoryRepository.UpdateStorageAsync(storage);
                     cart.Status = "bill";
                     cart.CustomerId = user.Id;
 
@@ -287,7 +291,8 @@ public class CheckoutService : ICheckoutService
     {
         try
         {
-            var cartItems = await _checkoutRepository.GetCartItemsAsync(cartIds);
+            var cartItems = await _cartRepository.GetCartItemsSessionAsync(cartIds); ;
+            
             if (cartItems == null || !cartItems.Any())
                 throw new Exception("No cart items found to process payment.");
 

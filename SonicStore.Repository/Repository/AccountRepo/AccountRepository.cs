@@ -27,13 +27,15 @@ namespace SonicStore.Repository.Repository.AccountRepo
         public async Task<bool> AddAccountAsync(Account account)
         {
             await _context.Accounts.AddAsync(account);
-            return await SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> UpdateAccountAsync(Account account)
         {
             _context.Accounts.Update(account);
-            return await SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> UpdatePasswordAsync(int accountId, string newPassword)
@@ -43,7 +45,8 @@ namespace SonicStore.Repository.Repository.AccountRepo
 
             account.Password = newPassword;
             _context.Accounts.Update(account);
-            return await SaveChangesAsync();
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> CheckUsernameExistsAsync(string username)

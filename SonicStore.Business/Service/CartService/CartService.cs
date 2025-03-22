@@ -24,7 +24,7 @@ public class CartService : ICartService
         if (cartItem == null) return 0;
 
         var unitPrice = await _cartRepository.GetUnitPrice(cartItem.StorageId) ?? 0;
-        var productOption = await _cartRepository.GetProductOptionByCartId(id.Value);
+        var productOption = await _inventoryRepository.GetProductOptionByCartId(id.Value);
 
         if (int.TryParse(quantity, out var quantityInput))
         {
@@ -100,6 +100,11 @@ public class CartService : ICartService
     public async Task SaveChange()
     {
         await _cartRepository.SaveChangesAsync();
+    }
+
+    public Task<List<Cart>> GetAllCartIncludeInfo(int customerId)
+    {
+        return _cartRepository.GetAllCartItemInCludeInfo(customerId);
     }
 }
 
